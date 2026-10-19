@@ -2002,10 +2002,6 @@ html.dark-theme .program-page .program-hero-banner .banner-theme-light,
 	scroll-margin-top: calc(var(--site-header-height, 81px) + 65px);
 }
 
-.program-page .program-section:last-of-type {
-	margin-bottom: var(--spacing-sm);
-}
-
 .program-page .section-heading-wrapper {
 	margin-bottom: var(--spacing-md);
 }
