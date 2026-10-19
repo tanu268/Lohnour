@@ -4,8 +4,8 @@ import hashlib
 import os
 import base64
 
-SSH_KEY = r"D:\Downloads\ssh-key-2026-10-08.key"
-HOST = "ubuntu@193.122.206.31"
+from deploy_config import get_ssh_config
+SSH_KEY, HOST = get_ssh_config()
 TARGET_DIR = "/var/lib/docker/volumes/lohnour_wp_data/_data/wp-content/themes/twentytwentyfive-child"
 
 files_to_deploy = [

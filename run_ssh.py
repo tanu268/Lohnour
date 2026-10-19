@@ -1,12 +1,15 @@
 import subprocess
 import sys
 
+from deploy_config import get_ssh_config
+SSH_KEY, HOST = get_ssh_config()
+
 cmd = sys.argv[1] if len(sys.argv) > 1 else "echo OK"
 ssh_cmd = [
     "ssh",
-    "-i", "D:\\Downloads\\ssh-key-2026-10-08.key",
+    "-i", SSH_KEY,
     "-o", "ConnectTimeout=10",
-    "ubuntu@193.122.206.31",
+    HOST,
     cmd
 ]
 proc = subprocess.run(ssh_cmd, capture_output=True, text=True)
