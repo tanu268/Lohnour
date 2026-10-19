@@ -1998,7 +1998,7 @@ html.dark-theme .program-page .program-hero-banner .banner-theme-light,
 
 .program-page .program-section {
 	padding: 24px 0;
-	margin-bottom: var(--spacing-md);
+	margin-bottom: calc(var(--spacing-md) + 20px);
 	scroll-margin-top: calc(var(--site-header-height, 81px) + 65px);
 }
 
@@ -3025,7 +3025,7 @@ html.dark-theme .program-page .program-hero-banner .banner-theme-light,
 
 	.program-page .program-section {
 		padding: 14px 0;
-		margin-bottom: var(--spacing-sm);
+		margin-bottom: calc(var(--spacing-sm) + 12px);
 		scroll-margin-top: calc(var(--site-header-height, 81px) + 50px);
 	}
 
