@@ -1,0 +1,112 @@
+<?php
+require_once '/var/www/html/wp-load.php';
+
+$slug = 'agentic-ai-foundations-dynamic';
+
+// Check if already exists
+$existing = get_page_by_path( $slug, OBJECT, 'lohnour_program' );
+$post_id = $existing ? $existing->ID : 0;
+
+$post_data = array(
+    'post_title'   => 'Agentic AI Foundations',
+    'post_name'    => $slug,
+    'post_type'    => 'lohnour_program',
+    'post_status'  => 'publish',
+    'post_excerpt' => 'Build practical AI agents, automate workflows, and understand how intelligent systems are designed.',
+);
+
+if ( $post_id ) {
+    $post_data['ID'] = $post_id;
+    wp_update_post( $post_data );
+    echo "Updated existing program post ID: $post_id\n";
+} else {
+    $post_id = wp_insert_post( $post_data );
+    echo "Created new program post ID: $post_id\n";
+}
+
+if ( is_wp_error( $post_id ) ) {
+    echo "ERROR: " . $post_id->get_error_message() . "\n";
+    exit(1);
+}
+
+// Set post thumbnail to light banner if exists
+if ( 161 ) {
+    set_post_thumbnail( $post_id, 161 );
+}
+
+// Meta Data
+update_post_meta( $post_id, '_lohnour_program_hero_desc', 'Build practical AI agents, automate workflows, and understand how intelligent systems are designed.' );
+
+$facts = array(
+    'duration_hours'   => '30 Hours',
+    'length_text'      => '~2 Months (~5 hrs/wk)',
+    'max_participants' => 'Max 5 Seats',
+    'delivery_style'   => 'Live Founder-Led',
+);
+update_post_meta( $post_id, '_lohnour_program_facts', $facts );
+
+$banners = array(
+    'dark_id'  => 160,
+    'light_id' => 161,
+    'alt'      => 'Agentic AI Foundations participants building AI agent systems',
+);
+update_post_meta( $post_id, '_lohnour_program_banners', $banners );
+
+$ctas = array(
+    'primary_label'   => 'Enquire About Next Cohort',
+    'primary_url'     => home_url( '/contact' ),
+    'secondary_label' => 'Explore 30-Hour Curriculum ↓',
+    'secondary_url'   => '#curriculum',
+);
+update_post_meta( $post_id, '_lohnour_program_ctas', $ctas );
+
+// Overview
+$overview_json = {"badge": "Foundational Architecture", "title": "Program Overview", "subtitle": "A practical, build-first coaching cohort designed to take you from foundational concepts to working autonomous agent architectures.", "main_h3": "What is Agentic AI Foundations?", "paragraphs": ["Agentic AI Foundations is an intensive, small-group live coaching program that teaches the core principles, engineering frameworks, and practical implementation patterns needed to build autonomous AI systems.", "Rather than treating AI as a static text prompt interface, this program treats AI as an autonomous decision engine capable of using external tools, interacting with APIs, executing multi-step task loops, and collaborating in multi-agent workflows.", "Delivered live in cohorts of no more than 5 participants, each session focuses on direct hands-on implementation: writing code, configuring automated workflow nodes, connecting tools, and testing live agent behaviors with personal feedback from the instructor."], "highlights_h3": "Key Cohort Highlights", "highlights": []};
+update_post_meta( $post_id, '_lohnour_program_overview', $overview_json );
+
+// Why
+$why_json = {"badge": "The Learning Philosophy", "title": "Why This Program", "subtitle": "A disciplined conceptual journey from basic prompting to autonomous orchestration.", "lead_text": "The purpose of this program is not to make exaggerated claims of turning you into an \"AI expert in 30 hours.\" Its purpose is to give you the solid, grounded mental models and practical engineering skills required to design, build, and evaluate functional agentic systems.", "flow_steps": [], "columns": [{"title": "Clear Mental Models", "desc": "Understand precisely where a simple prompt is enough, where a deterministic automation is superior, and where an autonomous agent provides true leverage."}, {"title": "Practical Independence", "desc": "Gain confidence connecting external tools, structuring JSON outputs, writing resilient Python handlers, and managing agent state without black-box confusion."}]};
+update_post_meta( $post_id, '_lohnour_program_why', $why_json );
+
+// Curriculum
+$curriculum_json = {"badge": "Interactive Detailed Breakdown", "title": "30-Hour Curriculum", "subtitle": "Explore the full week-by-week module syllabus. Inspect topics, hands-on activities, and tangible learning outcomes.", "modules": [{"number": "01", "prefix": "Module 1 —", "title": "AI, LLM & Agentic Foundations", "duration": "3 Hours", "overview": "Establish precise conceptual grounding in generative models, token dynamics, inference mechanics, and the architectural differences between static chatbot prompts, automated workflows, and true autonomous agents.", "learn_topics": ["Artificial Intelligence", "Machine Learning &amp; Deep Learning", "Generative AI &amp; Foundation Models", "Large Language Models (LLMs)", "Tokens &amp; Context Windows", "Model Inference Dynamics", "LLM Limitations &amp; Hallucinations", "Chatbot vs. LLM Application", "Workflow vs. Automation", "AI Workflows", "Agent Architecture Fundamentals", "Agentic vs. Multi-Agent Systems", "When an Agent is Actually Useful"], "practical": "", "progression_pills": [], "outcome": ""}, {"number": "02", "prefix": "Module 2 —", "title": "Prompt Engineering & LLM Control", "duration": "3 Hours", "overview": "Transition from conversational trial-and-error prompting to disciplined prompt engineering, structuring instructions, constraints, and dynamic inputs to produce deterministic, parser-ready outputs.", "learn_topics": ["Prompt Anatomy &amp; System Instructions", "User Instructions &amp; Context Injection", "Roles, Tasks, and Operational Constraints", "Few-Shot Prompting &amp; In-Context Demonstrations", "Structured Outputs &amp; JSON Schema Enforcement", "Prompt Chaining Principles", "Dynamic Prompt Construction", "Prompt Testing &amp; Validation", "Failure Analysis &amp; Edge Cases", "Hallucination Reduction Techniques", "Grounding Fundamentals"], "practical": "", "progression_pills": [], "outcome": ""}, {"number": "03", "prefix": "Module 3 —", "title": "Generative AI & Multimodal Systems", "duration": "2 Hours", "overview": "Expand beyond text into multi-modal models capable of processing and synthesizing images, audio, and documents within unified pipelines.", "learn_topics": ["Text, Image, Audio &amp; Video Modalities", "Multimodal Model Capabilities", "When to Use Different Modalities", "Prompt Strategies Across Media", "Model Strengths &amp; Operational Costs", "AI Content Pipelines", "Combining Modalities for Synthesis", "Pipeline Validation &amp; Quality Checks"], "practical": "", "progression_pills": [], "outcome": ""}, {"number": "04", "prefix": "Module 4 —", "title": "AI Workflows & Automation with n8n", "duration": "4 Hours", "overview": "Master workflow automation using n8n to connect live systems, webhooks, databases, and AI nodes into resilient production automations.", "learn_topics": ["n8n Architecture &amp; Nodes", "Triggers &amp; Webhooks", "Input/Output Payloads", "Conditional Logic &amp; Branching", "Data Transformation", "HTTP Requests &amp; REST APIs", "JSON Parsing &amp; Extraction", "Connecting External Services", "LLM Nodes Integration", "Structured Outputs in Workflows", "Conditional AI Logic", "Error Handling &amp; Retries", "Debugging Live Executions", "Workflow Architecture", "Traditional Automation", "AI-Assisted Automation", "AI Workflow", "Agentic Workflow Boundaries"], "practical": "", "progression_pills": [], "outcome": ""}, {"number": "05", "prefix": "Module 5 —", "title": "Python for AI Systems", "duration": "4 Hours", "overview": "Focus strictly on the practical Python required to interact with AI models: HTTP clients, JSON processing, environment management, and structured function calling.", "learn_topics": ["Variables &amp; Core Data Structures", "Functions &amp; Scope", "Loops &amp; Iteration", "Conditionals &amp; Flow Control", "Dictionaries &amp; Nested Data", "JSON Parsing &amp; Serialization", "File I/O Basics", "Modules &amp; Package Imports", "Virtual Environments &amp; Dependencies", "Environment Variables &amp; API Keys", "API Requests with Requests/HTTPX", "Error Handling &amp; Try/Except", "Basic Async Concepts", "Calling LLM APIs Directly", "Parsing Structured Model Responses", "Tool Function Signatures"], "practical": "", "progression_pills": [], "outcome": ""}, {"number": "06", "prefix": "Module 6 —", "title": "Building AI Agents", "duration": "6 Hours", "overview": "The foundational core: understand the anatomy of an agent (Model + Instructions + Tools + State) and implement the observe-decide-execute loop that enables autonomy.", "learn_topics": ["Agent Definition: Model + Instructions + Tools + State", "Tool Use &amp; Function Calling Mechanics", "API, Search, Calculator &amp; File Tools", "Tool Selection &amp; Argument Extraction", "The Autonomous Agent Loop", "Observing Tool Outputs &amp; State Updates", "Stopping Conditions &amp; Loop Termination", "Workflow vs. Agent Architectural Divide", "Error Recovery in Autonomous Loops"], "practical": "", "progression_pills": [], "outcome": ""}, {"number": "07", "prefix": "Module 7 —", "title": "Agentic Systems: Planning, Memory & Evaluation", "duration": "4 Hours", "overview": "Equip agents with task decomposition, short/long-term memory, self-reflection loops, and evaluation criteria to make them predictable and safe.", "learn_topics": ["Task Decomposition", "Multi-Step Complex Tasks", "Sequential vs. Parallel Execution", "Predefined Workflow vs. Dynamic Planning", "Conversation History", "Short-Term Working Memory", "Persistent Memory Concepts", "Context Window Management", "Reflection &amp; Self-Critique", "Generate → Evaluate → Improve", "Accuracy &amp; Completion Metrics", "Tool Selection Correctness", "Reliability &amp; Consistency", "Latency &amp; Token Cost Tradeoffs", "Loop Failure Handling", "Dead-End Detection", "Human-in-the-Loop Triggers", "Approval Gates for Sensitive Actions", "Output Sanitization &amp; Guardrails", "Deterministic Validation", "Preventing Destructive Actions", "Safe Testing Practices"], "practical": "", "progression_pills": [], "outcome": ""}, {"number": "08", "prefix": "Module 8 —", "title": "Multi-Agent Systems + Capstone", "duration": "4 Hours", "overview": "Understand when a single agent becomes insufficient and multiple specialized agents are required. Learn foundational coordinator patterns, agent delegation, and build the final Capstone project.", "learn_topics": ["Why Multi-Agent? Dividing Complex Domains", "Specialist Roles: Coordinator, Researcher, Analyst, Writer", "Sequential Pattern &amp; Parallel Pattern", "Handoff &amp; Delegation Mechanics", "Coordinator + Specialists Architecture", "Inter-Agent Communication &amp; Data Formats", "Synthesizing Specialist Outputs", "Framework-Agnostic Multi-Agent Design"], "practical": "", "progression_pills": [], "outcome": ""}]};
+update_post_meta( $post_id, '_lohnour_program_curriculum', $curriculum_json );
+
+// Build
+$build_json = {"badge": "Tangible Deliverables", "title": "What You'll Build", "subtitle": "A progressive series of functional artifacts created throughout your 30 hours of live building.", "cards": [{"step": "01", "title": "Prompt Pipeline", "desc": "Deterministic system instructions with few-shot examples and strict JSON validation."}, {"step": "02", "title": "AI Content Workflow", "desc": "Multimodal processing pipeline coordinating text and visual synthesis from a single input."}, {"step": "03", "title": "n8n Automation", "desc": "Production-ready workflow connecting webhooks, data nodes, and AI reasoning points."}, {"step": "04", "title": "Python AI Bridge", "desc": "Targeted script handling API requests, token management, error handling, and structured parsing."}, {"step": "05", "title": "Single AI Agent", "desc": "An autonomous tool-calling agent that iterates through an observe-and-decide execution loop."}, {"step": "06", "title": "Evaluated Agent System", "desc": "Agent with conversation memory, reflection self-correction, and human-in-the-loop guardrails."}, {"step": "07", "title": "Capstone: Multi-Agent System", "desc": "AI Research & Decision Assistant: Coordinator orchestrating Researcher, Analyst, and Writer specialist agents."}]};
+update_post_meta( $post_id, '_lohnour_program_build', $build_json );
+
+// Outcomes
+$outcomes_json = {"badge": "Concrete Capabilities", "title": "Program Outcomes", "subtitle": "The practical competencies you will possess upon completing this foundational coaching program.", "north_star_quote": "By the end of the program, you will understand how modern agentic systems work, know when an agent is the right solution, design AI-powered workflows, connect models to external tools and APIs, build basic AI systems with Python, create a functional single-agent system, evaluate and improve agent behavior, and build a simple multi-agent workflow.", "items": [{"title": "Architectural Literacy", "desc": "Articulate clearly how model instructions, tool definitions, memory, and loops interact to create agentic behavior."}, {"title": "Pragmatic Tool Selection", "desc": "Determine when a problem requires a simple prompt, a deterministic workflow, or an autonomous agent."}, {"title": "Hands-on Implementation", "desc": "Build, run, and debug Python-based agents and n8n automations that interact with live third-party APIs."}, {"title": "Safety & Guardrails", "desc": "Incorporate human-in-the-loop approvals, structured output validation, and failure-handling mechanisms."}]};
+update_post_meta( $post_id, '_lohnour_program_outcomes', $outcomes_json );
+
+// Skills
+$skills_json = {"badge": "Toolbox & Disciplines", "title": "Skills You'll Build", "subtitle": "Direct competencies cultivated through hands-on exercises across the 8 modules.", "tags": ["Agentic AI", "Prompt Engineering", "Generative AI", "Python for AI", "AI Automation", "n8n Workflows", "API Integration", "Workflow Design", "AI Agents", "Tool Calling", "Agent Evaluation", "Multi-Agent Systems"]};
+update_post_meta( $post_id, '_lohnour_program_skills', $skills_json );
+
+// Career
+$career_json = {"badge": "Practical Relevance", "title": "Where These Skills Can Be Applied", "subtitle": "Foundational competencies for modern AI implementation across engineering, operations, and product roles.", "cards": [{"title": "AI Automation Specialist", "desc": "Designing and maintaining intelligent business workflows that connect enterprise tools with LLM decision nodes."}, {"title": "AI Workflow Developer", "desc": "Constructing automated data pipelines, prompt chains, and automated tasks using n8n and Python."}, {"title": "AI Solutions Associate", "desc": "Prototyping practical AI implementations and evaluating technology options for teams and clients."}, {"title": "Prompt Engineer", "desc": "Crafting disciplined system instructions, JSON output schemas, and testing pipelines for reliable AI apps."}, {"title": "AI Implementation Specialist", "desc": "Assisting organizations with the pragmatic adoption of agents and safe, human-reviewed automation."}], "disclaimer": "Note: This program provides grounded engineering foundations and practical skills. It does not provide job placement guarantees or formal academic degree credentials."};
+update_post_meta( $post_id, '_lohnour_program_career', $career_json );
+
+// Format
+$format_json = {"badge": "The Coaching Experience", "title": "How Coaching Works", "subtitle": "This is live small-group coaching, not a pre-recorded video repository.", "steps": [{"num": "01", "title": "Live Cohort Sessions", "desc": "30 total hours delivered live over approximately 2 months (~5 hours per week of focused instruction and interactive coding)."}, {"num": "02", "title": "Maximum 5 Participants", "desc": "Small-group cohorts ensure your questions are answered immediately and every participant receives individual attention."}, {"num": "03", "title": "Founder-Led Instruction", "desc": "Guided directly by Lohnour Pro leadership with active industry perspective, clear explanations, and no teaching assistants."}, {"num": "04", "title": "Hands-On Building & Code Reviews", "desc": "Write code, connect live APIs, debug agent loops during sessions, and receive real-time constructive feedback."}]};
+update_post_meta( $post_id, '_lohnour_program_format', $format_json );
+
+// Scope
+$scope_json = {"badge": "Scope Clarity", "title": "Scope & Boundaries", "subtitle": "Clear expectations regarding what is taught and what lies outside the foundational focus of this program.", "included": ["30 hours of live instruction and collaborative coding", "Founder-led coaching and real-time guidance", "Small group format strictly capped at 5 participants", "Hands-on practical exercises for every module", "Single-agent and multi-agent implementation work", "n8n workflow automation and API node integration", "Focused Python-based AI system development", "Comprehensive Capstone project (AI Research & Decision Assistant)"], "excluded": ["LangChain, LangGraph, AutoGen, or CrewAI frameworks", "Model training, fine-tuning, or reinforcement learning", "Advanced vector database clustering or complex RAG topologies", "Kubernetes, MLOps, or complex cloud orchestration", "Placement guarantees, job referrals, or accredited certificates"], "scope_note": "A focused foundation designed to build the right mental models and practical skills before moving into advanced frameworks and production architecture."};
+update_post_meta( $post_id, '_lohnour_program_scope', $scope_json );
+
+// Enrollment
+$enrollment_json = {"badge": "Next Cohort Intake", "title": "Cohort Enrollment", "desc": "Cohorts are strictly limited to 5 participants to maintain hands-on founder-led coaching, active code reviews, and high-engagement discussions.", "pills": ["5 Seats Max Per Cohort", "Live & Founder-Led", "30 Total Hours (~2 Months)"], "cta_label": "\" class=\"btn btn-primary btn-lg\"> Enquire About the Next Cohort", "cta_url": "/contact", "subtext": "Schedule a brief conversation to verify prerequisites, discuss scheduling, and reserve your seat in the upcoming cohort."};
+update_post_meta( $post_id, '_lohnour_program_enrollment', $enrollment_json );
+
+// FAQs
+$faqs_json = {"badge": "Common Questions", "title": "Frequently Asked Questions", "subtitle": "Clear answers to essential questions regarding cohort structure, technical prerequisites, and outcomes.", "items": [{"question": "Is this live or self-paced?", "answer": "This is 100% live coaching. You meet in small-group sessions for instruction, collaborative exercises, and direct live coding rather than watching static pre-recorded videos."}, {"question": "How many people are in each cohort?", "answer": "Each cohort is strictly capped at a maximum of 5 participants to guarantee personalized feedback, live troubleshooting, and meaningful engagement."}, {"question": "How long is the program and what is the weekly commitment?", "answer": "The program spans 30 instructional and building hours delivered across approximately 2 months at roughly 5 hours per week."}, {"question": "Do I need prior Agentic AI experience?", "answer": "No prior experience with AI agents is required. The curriculum begins with fundamental generative AI and prompting mental models before building toward autonomous loops."}, {"question": "Do I need prior Python experience?", "answer": "Basic familiarity with code concepts is helpful, but Module 5 covers the exact subset of Python required for AI systems (variables, dictionaries, JSON, HTTP requests, and basic error handling)."}, {"question": "Will we build actual AI agents?", "answer": "Yes. In Module 6 and Module 7, you construct functional agents with external tool calling, reflection loops, and autonomous execution cycles."}, {"question": "Will we learn n8n?", "answer": "Yes. Module 4 is dedicated to n8n fundamentals: configuring triggers, nodes, webhooks, and integrating AI decision points into operational workflows."}, {"question": "Will we learn LangChain or LangGraph?", "answer": "No. This Foundations program focuses on raw, transparent architectures in Python and n8n so you master how agents genuinely function without framework abstractions."}, {"question": "Will we build multi-agent systems?", "answer": "Yes. Module 8 covers foundational coordinator and specialist delegation patterns, culminating in the AI Research & Decision Assistant Capstone project."}, {"question": "Is cloud deployment or Kubernetes included?", "answer": "No. The curriculum is focused on core agent mechanics, local execution, and API integration rather than advanced cloud infrastructure or MLOps."}, {"question": "What happens after completing the program?", "answer": "You will have working codebases, functional automations, and the independent mental model needed to build production systems or pursue advanced framework specializations."}, {"question": "How do I join the next cohort?", "answer": "Use the consultation form on the Contact page to enquire. Because each cohort is capped at 5 seats, enrollment is confirmed on a rolling basis following a brief alignment discussion."}]};
+update_post_meta( $post_id, '_lohnour_program_faqs', $faqs_json );
+
+// Closing CTA
+$closing_json = {"title": "Ready to build your foundations in Agentic AI?", "desc": "Strictly limited to 5 participants per cohort for direct founder-led guidance and hands-on code reviews.", "cta_label": "\" class=\"btn btn-primary btn-lg\"> Enquire About the Next Cohort", "cta_url": "/contact"};
+update_post_meta( $post_id, '_lohnour_program_closing_cta', $closing_json );
+
+echo "Successfully migrated all structured fields to post ID $post_id!\n";
+echo "Permalink: " . get_permalink( $post_id ) . "\n";

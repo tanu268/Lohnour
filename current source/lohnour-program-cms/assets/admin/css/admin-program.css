@@ -1,0 +1,88 @@
+/**
+ * Lohnour Program CMS Admin Styles
+ */
+
+.lohnour-admin-meta-wrap {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	padding: 5px 0;
+}
+
+.lohnour-grid-2 {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 15px;
+}
+
+.lohnour-grid-3 {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 15px;
+}
+
+.lohnour-grid-4 {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 15px;
+}
+
+@media (max-width: 900px) {
+	.lohnour-grid-2,
+	.lohnour-grid-3,
+	.lohnour-grid-4 {
+		grid-template-columns: 1fr;
+	}
+}
+
+.lohnour-section-title {
+	font-size: 14px;
+	font-weight: 600;
+	margin: 20px 0 10px 0;
+	padding-bottom: 6px;
+	border-bottom: 1px solid #e2e4e7;
+	color: #1d2327;
+}
+
+.lohnour-module-card,
+.lohnour-faq-card {
+	border: 1px solid #ccd0d4;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+	transition: border-color .2s ease;
+}
+
+.lohnour-module-card:hover,
+.lohnour-faq-card:hover {
+	border-color: #2271b1;
+}
+
+.lohnour-module-card-header,
+.lohnour-faq-card-header {
+	background: #f6f7f7;
+	user-select: none;
+}
+
+.lohnour-drag-handle {
+	font-size: 18px;
+	height: 18px;
+	width: 18px;
+}
+
+.module-badge-display {
+	display: inline-block;
+	background: #2271b1;
+	color: #fff;
+	padding: 2px 7px;
+	border-radius: 4px;
+	font-size: 11px;
+	margin-right: 6px;
+}
+
+.lohnour-media-box {
+	background: #fafafa;
+}
+
+.lohnour-sortable-placeholder {
+	border: 2px dashed #2271b1 !important;
+	background: #f0f6fc !important;
+	height: 45px;
+	margin-bottom: 10px;
+}

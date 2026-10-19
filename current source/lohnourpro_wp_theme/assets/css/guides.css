@@ -1,0 +1,189 @@
+/**
+ * Guides Hub Custom Styles - Lohnour Pro
+ */
+
+/* Accordion Component */
+.guides-accordion-container {
+    margin-top: var(--spacing-sm);
+}
+
+.guides-accordion-item {
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.guides-accordion-item:hover {
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.guides-accordion-header:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.guides-accordion-item.active .accordion-icon {
+    transform: rotate(45deg);
+}
+
+/* TOC Styles */
+.guides-toc-list {
+    text-align: left !important;
+}
+
+.guides-toc-list li {
+    margin-bottom: 8px;
+    text-align: left !important;
+}
+
+.guides-toc-list a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+    display: block;
+    text-align: left !important;
+}
+
+.guides-toc-list a:hover,
+.guides-toc-list a.active {
+    color: var(--color-accent);
+    padding-left: 4px;
+}
+
+/* Offset for headings targeted by TOC anchors under sticky header */
+.guide-content h2,
+.guide-content h3 {
+    scroll-margin-top: 100px;
+}
+
+/* Mobile Outline Toggle styles */
+.mobile-outline-toggle-wrapper {
+    display: none !important;
+}
+
+/* Outline Accordion styles */
+.outline-module-header:hover h5 {
+    color: var(--color-accent) !important;
+}
+
+.outline-module-content {
+    transition: max-height 0.3s ease-out;
+}
+
+/* Responsive sidebars for Lesson layout */
+@media (max-width: 1200px) {
+    .guides-three-column-grid {
+        grid-template-columns: 240px 1fr !important;
+    }
+    .guides-sidebar-right {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-outline-toggle-wrapper {
+        display: block !important;
+        position: fixed !important;
+        bottom: 24px !important;
+        left: 24px !important;
+        right: auto !important;
+        transform: none !important;
+        z-index: 1000 !important;
+        width: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Floating Button: Default (Dark Theme) is Light */
+    #mobile-outline-toggle {
+        background: #ffffff !important;
+        backdrop-filter: blur(16px) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        color: #0a0a0a !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+        border-radius: 50% !important;
+        width: 50px !important;
+        height: 50px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        padding: 0 !important;
+        -webkit-tap-highlight-color: transparent !important;
+        outline: none !important;
+        user-select: none !important;
+    }
+
+    /* Floating Button: Light Theme is Dark */
+    html.light-theme #mobile-outline-toggle {
+        background: #1d1d1f !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        color: #ffffff !important;
+    }
+
+    #mobile-outline-toggle:active {
+        transform: scale(0.9) !important;
+    }
+    #mobile-outline-toggle:focus {
+        outline: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+
+    /* SVG Icon Switch Transitions */
+    #mobile-outline-toggle.active .icon-menu {
+        transform: rotate(90deg) !important;
+        opacity: 0 !important;
+    }
+    #mobile-outline-toggle.active .icon-close {
+        transform: rotate(0deg) !important;
+        opacity: 1 !important;
+    }
+    
+    .guides-three-column-grid {
+        grid-template-columns: 1fr !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    .guides-sidebar-left {
+        display: block !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-height: 100vh !important;
+        z-index: 999 !important;
+        background: var(--color-bg, #0a0a0a) !important;
+        backdrop-filter: blur(20px) !important;
+        padding: 80px var(--spacing-md) var(--spacing-xl) var(--spacing-md) !important;
+        overflow-y: auto !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+
+        /* Pop-up scaling animation from bottom left corner */
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: scale(0.05) !important;
+        transform-origin: 24px calc(100% - 24px) !important;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease !important;
+    }
+    
+    .guides-sidebar-left.mobile-open {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        transform: scale(1) !important;
+    }
+}
+
+/* Pagination Hover Effects */
+.guide-lesson-pagination a {
+    transition: transform 0.25s ease-in-out !important;
+}
+
+.guide-lesson-pagination a:hover {
+    transform: translateY(-2px) !important;
+}
+
+.guide-lesson-pagination a:hover .nav-title {
+    color: var(--color-accent) !important;
+}

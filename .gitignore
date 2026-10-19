@@ -1,0 +1,53 @@
+# ==============================================================================
+# LOHNOUR PRO - ROOT REPOSITORY .GITIGNORE
+# Safe, minimal, explicit rules for GitHub baseline
+# ==============================================================================
+
+# 1. Environment & Credentials (Rule 7)
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.secret
+credentials.*
+secrets.*
+
+# 2. Database Dumps & Entity Exports (Rule 5)
+lohnour_old_clean.sql
+lohnour_db.sql.gz
+post_162_pre_fix_backup.json
+*.sql
+*.sql.gz
+
+# 3. Large Backup Archives (Rule 6)
+*.wpress
+lohnour_wp_content.tar.gz
+plugins.tar.gz
+twentytwentyfive-child.tar.gz
+surgical_update.tar.gz
+lohnour-program-cms.tar.gz
+lohnour-theme-additions.tar.gz
+current source/lohnourpro_wp_theme/theme.zip
+
+# 4. Intermediate Staging Backups & Pre-Phase Snapshots
+current source/lohnourpro_wp_theme/*.bak_*
+current source/lohnourpro_wp_theme.bak_pre_phase2/
+
+# 5. Old Reference Repository (Rule 4 - Separate History & Unrelated LMS)
+old reference/
+
+# 6. Ephemeral Inspection Logs & Test Dumps
+oracle_*.txt
+local_*.txt
+oracle_routes.txt
+oracle_files.txt
+oracle_hashes.txt
+*.test_output
+
+# 7. OS & IDE Metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
