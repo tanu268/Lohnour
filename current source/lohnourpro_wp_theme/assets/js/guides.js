@@ -90,45 +90,59 @@ document.addEventListener('DOMContentLoaded', function() {
         const header = module.querySelector('.outline-module-header');
         const content = module.querySelector('.outline-module-content');
         const chevron = module.querySelector('.module-chevron');
-        
-        // Initial setup for max-height on expanded module (use none to avoid 0px height calculation on hidden mobile container)
+        const headerTitle = module.querySelector('h5');
+
+        if (!header || !content) return;
+
+        // Ensure overflow is hidden for smooth height clipping
+        content.style.overflow = 'hidden';
+
+        // Initial setup for max-height on expanded module
         if (module.classList.contains('expanded')) {
-            content.style.maxHeight = "none";
+            content.style.maxHeight = 'none';
+            if (chevron) chevron.style.transform = 'rotate(90deg)';
+            if (headerTitle) headerTitle.style.color = 'var(--color-accent)';
+        } else {
+            content.style.maxHeight = '0px';
+            if (chevron) chevron.style.transform = 'rotate(0deg)';
+            if (headerTitle) headerTitle.style.color = 'var(--color-text-muted)';
         }
-        
-        header.addEventListener('click', () => {
-            const isExpanded = module.classList.contains('expanded');
-            
-            // If this is the active lesson module and it is already expanded, prevent collapsing it
-            if (module.classList.contains('active-lesson-module') && isExpanded) {
-                return;
-            }
-            
-            // Collapse all modules EXCEPT the active lesson module
-            outlineModules.forEach(otherMod => {
-                if (otherMod.classList.contains('active-lesson-module')) {
-                    return; // Keep active lesson module open
+
+        header.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isCurrentlyExpanded = module.classList.contains('expanded');
+
+            if (isCurrentlyExpanded) {
+                // COLLAPSE MODULE
+                // If currently 'none', set to exact scrollHeight first so transition can interpolate to 0px
+                if (content.style.maxHeight === 'none' || !content.style.maxHeight) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    content.offsetHeight; // Force reflow
                 }
-                otherMod.classList.remove('expanded');
-                otherMod.querySelector('.outline-module-content').style.maxHeight = null;
-                const otherChevron = otherMod.querySelector('.module-chevron');
-                if (otherChevron) otherChevron.style.transform = 'rotate(0deg)';
-                const otherHeaderTitle = otherMod.querySelector('h5');
-                if (otherHeaderTitle) otherHeaderTitle.style.color = 'var(--color-text-muted)';
-            });
-            
-            if (!isExpanded) {
-                module.classList.add('expanded');
-                content.style.maxHeight = content.scrollHeight + "px";
-                if (chevron) chevron.style.transform = 'rotate(90deg)';
-                const headerTitle = module.querySelector('h5');
-                if (headerTitle) headerTitle.style.color = 'var(--color-accent)';
-            } else {
+
+                // Trigger smooth collapse
+                requestAnimationFrame(() => {
+                    content.style.maxHeight = '0px';
+                });
+
                 module.classList.remove('expanded');
-                content.style.maxHeight = null;
                 if (chevron) chevron.style.transform = 'rotate(0deg)';
-                const headerTitle = module.querySelector('h5');
                 if (headerTitle) headerTitle.style.color = 'var(--color-text-muted)';
+            } else {
+                // EXPAND MODULE
+                module.classList.add('expanded');
+                content.style.maxHeight = content.scrollHeight + 'px';
+                if (chevron) chevron.style.transform = 'rotate(90deg)';
+                if (headerTitle) headerTitle.style.color = 'var(--color-accent)';
+
+                // After transition finishes, allow dynamic height adjustment if expanded
+                const onTransitionEnd = (event) => {
+                    if (event.propertyName === 'max-height' && module.classList.contains('expanded')) {
+                        content.style.maxHeight = 'none';
+                    }
+                    content.removeEventListener('transitionend', onTransitionEnd);
+                };
+                content.addEventListener('transitionend', onTransitionEnd);
             }
         });
     });
