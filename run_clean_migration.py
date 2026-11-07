@@ -4,8 +4,8 @@ import subprocess
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-SSH_KEY = r"D:\Downloads\ssh-key-2026-10-08.key"
-HOST = "ubuntu@193.122.206.31"
+from deploy_config import get_ssh_config
+SSH_KEY, HOST = get_ssh_config()
 WP_CONTAINER = "lohnour-wordpress-1"
 
 # 1. SCP JSON data file to /tmp/

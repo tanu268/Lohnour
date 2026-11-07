@@ -1,27 +1,40 @@
 # ==============================================================================
 # LOHNOUR PRO - ROOT REPOSITORY .GITIGNORE
-# Safe, minimal, explicit rules for GitHub baseline
+# Hardened Production-Safe Rules for Multi-Developer Collaboration
 # ==============================================================================
 
-# 1. Environment & Credentials (Rule 7)
+# 1. Environment & Credentials (CRITICAL - NEVER COMMIT)
 .env
 .env.*
 !.env.example
 *.key
 *.pem
 *.secret
+*.crt
+*.csr
 credentials.*
 secrets.*
+id_rsa*
+id_ed25519*
 
-# 2. Database Dumps & Entity Exports (Rule 5)
+# 2. Database Dumps & SQL Artifacts
 lohnour_old_clean.sql
 lohnour_db.sql.gz
 post_162_pre_fix_backup.json
 *.sql
 *.sql.gz
+*.sqlite
+*.sqlite3
+*.db
 
-# 3. Large Backup Archives (Rule 6)
+# 3. Archives & Compressed Backups
 *.wpress
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.rar
+*.7z
 lohnour_wp_content.tar.gz
 plugins.tar.gz
 twentytwentyfive-child.tar.gz
@@ -30,12 +43,23 @@ lohnour-program-cms.tar.gz
 lohnour-theme-additions.tar.gz
 current source/lohnourpro_wp_theme/theme.zip
 
-# 4. Intermediate Staging Backups & Pre-Phase Snapshots
-current source/lohnourpro_wp_theme/*.bak_*
+# 4. Intermediate Backups, Snapshots & Temp Files
+*.bak
+*.bak.*
+*.bak_*
+**/*.bak
+**/*.bak.*
+**/*.bak_*
+*.old
+*.orig
+*.swp
+*~
 current source/lohnourpro_wp_theme.bak_pre_phase2/
 
-# 5. Old Reference Repository (Rule 4 - Separate History & Unrelated LMS)
-old reference/
+# 5. Media Uploads & WordPress User Content (Runtime Storage)
+uploads/
+wp-content/uploads/
+**/uploads/202*
 
 # 6. Ephemeral Inspection Logs & Test Dumps
 oracle_*.txt
@@ -43,7 +67,9 @@ local_*.txt
 oracle_routes.txt
 oracle_files.txt
 oracle_hashes.txt
+*.log
 *.test_output
+test-results/
 
 # 7. OS & IDE Metadata
 .DS_Store
@@ -51,3 +77,51 @@ Thumbs.db
 desktop.ini
 .idea/
 .vscode/
+*.suo
+*.user
+*.ntvs*
+*.njsproj
+
+# 8. Python Runtime & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 9. Node.js & Webpack Artifacts
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 10. Local Scratch & Ad-Hoc Workspace Directories
+_audit/
+scratch/
+backups/
+comparisons/
+production-extract/
+snapshots/
+old reference/
+
+# 11. Root Duplicate Phase Reports (Authoritative copies live in docs/)
+/FINAL_CONTENT_DIFF_REPORT.md
+/LOHNOUR_PRO_POST_DEPLOYMENT_SECURITY_AUDIT.md
+/PHASE_10_*.md
+/PHASE_11_*.md
+/PHASE_12_*.md
+/PHASE_13_*.md
+/PHASE_6_BACKUP_TRANSFER_REPORT.md
+/PHASE_7_1_ROLLBACK_CORRECTION_REPORT.md
+/PHASE_7_2_FINAL_ROLLBACK_CORRECTIONS.md
+/PHASE_7_PRODUCTION_BACKUP_AND_ROLLBACK_READINESS.md
+
+# 12. Early Duplicate Draft Reports inside Theme (Canonical copies tracked in docs/)
+current source/lohnourpro_wp_theme/my-docs/BACKUP_AND_ROLLBACK.md
+current source/lohnourpro_wp_theme/my-docs/DEPLOYMENT_ARCHITECTURE.md
+current source/lohnourpro_wp_theme/my-docs/DEPLOYMENT_PLAN.md
+current source/lohnourpro_wp_theme/my-docs/INFRASTRUCTURE_AUDIT.md
+current source/lohnourpro_wp_theme/my-docs/PRE_DEPLOYMENT_CHECKLIST.md
+current source/lohnourpro_wp_theme/my-docs/SECURITY_REVIEW.md
+

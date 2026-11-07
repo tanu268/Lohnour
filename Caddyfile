@@ -1,0 +1,31 @@
+{
+	admin off
+}
+
+pro.lohnour.com {
+	encode zstd gzip
+
+	reverse_proxy lohnour-wordpress:80 {
+		transport http {
+			response_header_timeout 300s
+		}
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+
+	request_body {
+		max_size 512MB
+	}
+
+	log {
+		output stdout
+		format console
+		level INFO
+	}
+}

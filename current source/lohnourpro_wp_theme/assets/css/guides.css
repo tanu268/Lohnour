@@ -65,7 +65,36 @@
 }
 
 .outline-module-content {
+    overflow: hidden;
     transition: max-height 0.3s ease-out;
+}
+
+/* Lesson Sub-Level in Left Outline Sidebar */
+.outline-lesson-group {
+    margin-bottom: 12px;
+}
+
+.outline-lesson-title {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.guide-outline-child-link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+    display: inline-block;
+}
+
+.guide-outline-child-link:hover,
+.guide-outline-child-link.active {
+    color: var(--color-accent);
+    font-weight: 500;
 }
 
 /* Responsive sidebars for Lesson layout */

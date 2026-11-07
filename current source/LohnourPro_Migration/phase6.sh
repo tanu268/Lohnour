@@ -24,8 +24,8 @@ echo "Checkpoint created: ${CP_NAME}"
 echo '=== STEP 4: INITIALIZE WORDPRESS ==='
 IS_INSTALLED=$(sudo docker compose -f /opt/lohnour/docker-compose.yml exec -T wordpress wp core is-installed --allow-root || echo "no")
 if [ "$IS_INSTALLED" != "yes" ]; then
-    echo "Installing WordPress Core..."
-    sudo docker compose -f /opt/lohnour/docker-compose.yml exec -T wordpress wp core install --url="http://localhost" --title="Lohnour Migration Temp" --admin_user="lohnouradmin" --admin_password="MigrationTempPassword123!" --admin_email="admin@lohnour.com" --allow-root
+    ADMIN_PASS="${WP_ADMIN_PASSWORD:-${ADMIN_PASSWORD}}"
+    sudo docker compose -f /opt/lohnour/docker-compose.yml exec -T wordpress wp core install --url="http://localhost" --title="Lohnour Migration Temp" --admin_user="${ADMIN_USER:-lohnouradmin}" --admin_password="${ADMIN_PASS}" --admin_email="${ADMIN_EMAIL:-admin@lohnour.com}" --allow-root
 fi
 
 echo '=== STEP 5: INSTALL MIGRATION PLUGIN ==='

@@ -37,13 +37,12 @@
 				<div class="footer-nav">
 					<h4 class="footer-heading">Navigation</h4>
 					<ul>
-						<li><a href="<?php echo esc_url( home_url( '/programs/' ) ); ?>">Programs</a></li>
-						<li><a href="<?php echo esc_url( home_url( '/coaching/' ) ); ?>">Coaching</a></li>
-						<li><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>">Services</a></li>
-						<li><a href="<?php echo esc_url( home_url( '/guides/' ) ); ?>">Guides</a></li>
-						<li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a></li>
-						<li style="margin-top: 8px;"><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About</a></li>
-						<li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/services' ) ); ?>">Services</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/about' ) ); ?>">About</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/contact' ) ); ?>">Contact</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/blog' ) ); ?>">Blog</a></li>
+						<li><a href="<?php echo esc_url( home_url( '/guides' ) ); ?>">Guides</a></li>
 					</ul>
 				</div>
 				
@@ -61,7 +60,7 @@
 					<h4 class="footer-heading">Contact</h4>
 					<ul>
 						<li><a href="mailto:hello@pro.lohnour.com" style="color: inherit; text-decoration: none;">hello@pro.lohnour.com</a></li>
-						<li><a href="tel:+918349240685" style="color: inherit; text-decoration: none;">+91 83492 40685</a></li>
+
 						<li>Indore, India</li>
 					</ul>
 				</div>
@@ -72,6 +71,8 @@
 					&copy; <?php echo date('Y'); ?> <?php bloginfo( 'name' ); ?>. All rights reserved.
 				</div>
 				<div class="footer-legal">
+					<a href="#">Privacy Policy</a>
+					<a href="#">Terms & Conditions</a>
 				</div>
 			</div>
 		</div>

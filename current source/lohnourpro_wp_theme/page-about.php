@@ -155,10 +155,10 @@ get_header(); ?>
 			}
 		}
 
-		$link_corporate  = ! empty( $pathway_map['corporate'] ) ? $pathway_map['corporate'] : home_url( '/programs/pathway/corporate-teams' );
-		$link_individual = ! empty( $pathway_map['individual'] ) ? $pathway_map['individual'] : home_url( '/programs/pathway/individual-professionals' );
-		$link_student    = ! empty( $pathway_map['student'] ) ? $pathway_map['student'] : home_url( '/programs/pathway/students' );
-		$link_faculty    = ! empty( $pathway_map['faculty'] ) ? $pathway_map['faculty'] : home_url( '/programs/pathway/faculty-educators' );
+		$link_corporate  = ! empty( $pathway_map['corporate'] ) ? $pathway_map['corporate'] : home_url( '/pathway/corporate-teams' );
+		$link_individual = ! empty( $pathway_map['individual'] ) ? $pathway_map['individual'] : home_url( '/pathway/individual-professionals' );
+		$link_student    = ! empty( $pathway_map['student'] ) ? $pathway_map['student'] : home_url( '/pathway/students' );
+		$link_faculty    = ! empty( $pathway_map['faculty'] ) ? $pathway_map['faculty'] : home_url( '/pathway/faculty-educators' );
 		?>
 
 		<section class="who-we-serve-section" style="margin-bottom: var(--spacing-lg);">
@@ -246,8 +246,8 @@ get_header(); ?>
 					Whether you need intensive hands-on training to upskill your team, or expert consulting to architect your new AI workflows, we build the practical capabilities you need to scale.
 				</p>
 				<div style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap;">
-					<a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn btn-primary btn-lg">Contact Us</a>
-					<a href="<?php echo esc_url( home_url( '/programs' ) ); ?>" class="btn btn-outline btn-lg">Explore All Offerings &rarr;</a>
+					<a href="<?php echo esc_url( home_url( '/contact' ) ); ?>" class="btn btn-primary btn-lg">Book a Consultation</a>
+					<a href="<?php echo esc_url( home_url( '/services' ) ); ?>" class="btn btn-outline btn-lg">Explore All Offerings &rarr;</a>
 				</div>
 			</div>
 		</section>

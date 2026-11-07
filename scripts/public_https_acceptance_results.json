@@ -1,0 +1,140 @@
+[
+  {
+    "route": "/",
+    "url": "https://pro.lohnour.com/",
+    "status_code": 200,
+    "bytes": 74743,
+    "passed": true,
+    "keywords": [
+      "hero",
+      "testimonial",
+      "footer"
+    ],
+    "hsts": "missing",
+    "caddy_via": "missing",
+    "php_powered": "missing",
+    "extra_info": ""
+  },
+  {
+    "route": "/about/",
+    "url": "https://pro.lohnour.com/about/",
+    "status_code": 200,
+    "bytes": 62035,
+    "passed": true,
+    "keywords": [
+      "about",
+      "founder",
+      "lohnour"
+    ],
+    "hsts": "missing",
+    "caddy_via": "missing",
+    "php_powered": "missing",
+    "extra_info": ""
+  },
+  {
+    "route": "/services/",
+    "url": "https://pro.lohnour.com/services/",
+    "status_code": 200,
+    "bytes": 52802,
+    "passed": true,
+    "keywords": [
+      "service",
+      "pathway"
+    ],
+    "hsts": "missing",
+    "caddy_via": "missing",
+    "php_powered": "missing",
+    "extra_info": ""
+  },
+  {
+    "route": "/coaching/",
+    "url": "https://pro.lohnour.com/coaching/",
+    "status_code": 200,
+    "bytes": 49135,
+    "passed": true,
+    "keywords": [
+      "coaching"
+    ],
+    "hsts": "missing",
+    "caddy_via": "missing",
+    "php_powered": "missing",
+    "extra_info": ""
+  },
+  {
+    "route": "/coaching/agentic-ai-foundations/",
+    "url": "https://pro.lohnour.com/coaching/agentic-ai-foundations/",
+    "status_code": 200,
+    "bytes": 101426,
+    "passed": true,
+    "keywords": [
+      "module",
+      "curriculum",
+      "agentic"
+    ],
+    "hsts": "missing",
+    "caddy_via": "missing",
+    "php_powered": "missing",
+    "extra_info": " (Module markers found: 30)"
+  },
+  {
+    "route": "/guides/",
+    "url": "https://pro.lohnour.com/guides/",
+    "status_code": 200,
+    "bytes": 46636,
+    "passed": true,
+    "keywords": [
+      "guide"
+    ],
+    "hsts": "missing",
+    "caddy_via": "missing",
+    "php_powered": "missing",
+    "extra_info": ""
+  },
+  {
+    "route": "/contact/",
+    "url": "https://pro.lohnour.com/contact/",
+    "status_code": 200,
+    "bytes": 56125,
+    "passed": true,
+    "keywords": [
+      "contact",
+      "form"
+    ],
+    "hsts": "missing",
+    "caddy_via": "missing",
+    "php_powered": "missing",
+    "extra_info": ""
+  },
+  {
+    "route": "/blog/",
+    "url": "https://pro.lohnour.com/blog/",
+    "status_code": 200,
+    "bytes": 46018,
+    "passed": true,
+    "keywords": [
+      "blog",
+      "article",
+      "post"
+    ],
+    "hsts": "missing",
+    "caddy_via": "missing",
+    "php_powered": "missing",
+    "extra_info": ""
+  },
+  {
+    "route": "/wp-login.php",
+    "url": "https://pro.lohnour.com/wp-login.php",
+    "status_code": 200,
+    "bytes": 5727,
+    "passed": true,
+    "keywords": [
+      "loginform",
+      "wp-login",
+      "user_login"
+    ],
+    "hsts": "missing",
+    "caddy_via": "missing",
+    "php_powered": "missing",
+    "extra_info": ""
+  }
+]

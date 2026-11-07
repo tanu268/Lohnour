@@ -1,167 +1,127 @@
 <?php
 /**
- * The template for displaying programs archive
- * Phase 4 - Forensic Implementation of Programs Catalog
+ * The template for displaying services archive (Pathways & their Programs)
+ * Redesigned to show selected programs under each pathway category.
  *
  * @package Twenty_Twenty_Five_Child
  */
 
-get_header(); 
+get_header(); ?>
 
-// Fetch taxonomies for the filter UI
-$pathways = get_terms( array( 'taxonomy' => 'lohnour_pathway', 'hide_empty' => true ) );
-$industries = get_terms( array( 'taxonomy' => 'lohnour_industry', 'hide_empty' => true ) );
+<main id="primary" class="site-main" style="padding-top: var(--header-clearance); padding-bottom: var(--spacing-lg);">
+	<div class="container">
+		<?php
+		get_template_part( 'template-parts/page-header', null, array(
+			'title'       => __( 'Training Programs', 'twentytwentyfive-child' ),
+			'subtitle'    => __( 'Explore our hands-on, practical AI training programs categorized by learning pathways.', 'twentytwentyfive-child' ),
+			'breadcrumbs' => array(
+				array( 'label' => __( 'Home', 'twentytwentyfive-child' ), 'url' => home_url( '/' ) ),
+				array( 'label' => __( 'Services', 'twentytwentyfive-child' ) ),
+			),
+		) );
+		?>
 
-// Form state
-$search_query = get_search_query();
-$current_pathway = isset( $_GET['lohnour_pathway'] ) ? sanitize_text_field( $_GET['lohnour_pathway'] ) : '';
-$current_industry = isset( $_GET['lohnour_industry'] ) ? sanitize_text_field( $_GET['lohnour_industry'] ) : '';
-?>
+		<?php
+		$pathways = lohnour_get_ordered_pathways( array(
+			'taxonomy'   => 'lohnour_pathway',
+			'hide_empty' => false,
+		) );
 
-<main id="primary" class="site-main" style="padding-top: var(--header-clearance);">
-	
-	<!-- PROGRAMS HERO -->
-	<section class="page-hero bg-alt" style="padding: var(--spacing-xxl) 0 var(--spacing-xl) 0; border-bottom: 1px solid var(--color-border-subtle);">
-		<div class="container text-center">
-			<div style="margin-bottom: var(--spacing-sm);">
-				<span class="badge" style="font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-text-muted); background: transparent; border: 1px solid var(--color-border); padding: 4px 12px; border-radius: var(--radius-full);">Programs</span>
-			</div>
-			<h1 class="headline-lg" style="margin-bottom: var(--spacing-md); font-family: var(--font-heading);">Learn AI. Build practical capability.</h1>
-			<p class="section-subtitle" style="max-width: 600px; margin: 0 auto; color: var(--color-text-secondary); font-size: 1.125rem;">Structured AI learning experiences for professionals, students, faculty, and organizations.</p>
-		</div>
-	</section>
+		if ( ! empty( $pathways ) && ! is_wp_error( $pathways ) ) :
+			foreach ( $pathways as $pathway ) :
+				$featured_ids = get_term_meta( $pathway->term_id, '_lohnour_featured_programs', true );
+				$display_limit = get_term_meta( $pathway->term_id, '_lohnour_display_limit', true );
+				if ( empty( $display_limit ) ) {
+					$display_limit = 3;
+				}
 
-	<section class="catalog-section" style="padding: var(--spacing-xl) 0; background: var(--color-bg);">
-		<div class="container">
-			
-			<!-- SEARCH / DISCOVERY -->
-			<div class="catalog-controls" style="margin-bottom: var(--spacing-xl);">
-				<form method="GET" action="<?php echo esc_url( home_url( '/' ) ); ?>" class="catalog-filter-form">
-					<input type="hidden" name="post_type" value="lohnour_service">
-					
-					<div class="search-primitive" style="max-width: 400px; margin-bottom: var(--spacing-md);">
-						<svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-						<input type="text" name="s" class="form-control" placeholder="Search programs..." value="<?php echo esc_attr( $search_query ); ?>" style="width: 100%; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 12px 16px 12px 40px; background: var(--color-bg-surface); color: var(--color-text); font-family: var(--font-base);">
-					</div>
-					
-					<!-- FILTERS -->
-					<?php if ( ! empty( $pathways ) && ! is_wp_error( $pathways ) ) : ?>
-					<div class="filter-group" style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap; align-items: center; margin-bottom: var(--spacing-sm);">
-						<span style="font-size: 0.875rem; color: var(--color-text-muted); font-weight: 500; margin-right: 8px;">Audience:</span>
-						<button type="submit" name="lohnour_pathway" value="" class="filter-btn <?php echo empty( $current_pathway ) ? 'is-active' : ''; ?>">All</button>
-						<?php foreach ( $pathways as $pathway ) : ?>
-							<button type="submit" name="lohnour_pathway" value="<?php echo esc_attr( $pathway->slug ); ?>" class="filter-btn <?php echo ( $current_pathway === $pathway->slug ) ? 'is-active' : ''; ?>">
-								<?php echo esc_html( $pathway->name ); ?>
-							</button>
-						<?php endforeach; ?>
-					</div>
-					<?php endif; ?>
+				// Build query args
+				$args = array(
+					'post_type'      => 'lohnour_service',
+					'post_status'    => 'publish',
+					'posts_per_page' => intval( $display_limit ),
+				);
 
-					<?php if ( ! empty( $industries ) && ! is_wp_error( $industries ) ) : ?>
-					<div class="filter-group" style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap; align-items: center;">
-						<span style="font-size: 0.875rem; color: var(--color-text-muted); font-weight: 500; margin-right: 8px;">Topic:</span>
-						<button type="submit" name="lohnour_industry" value="" class="filter-btn <?php echo empty( $current_industry ) ? 'is-active' : ''; ?>">All</button>
-						<?php foreach ( $industries as $industry ) : ?>
-							<button type="submit" name="lohnour_industry" value="<?php echo esc_attr( $industry->slug ); ?>" class="filter-btn <?php echo ( $current_industry === $industry->slug ) ? 'is-active' : ''; ?>">
-								<?php echo esc_html( $industry->name ); ?>
-							</button>
-						<?php endforeach; ?>
-					</div>
-					<?php endif; ?>
+				if ( ! empty( $featured_ids ) && is_array( $featured_ids ) ) {
+					$args['post__in'] = $featured_ids;
+					$args['orderby'] = 'post__in';
+				} else {
+					$args['tax_query'] = array(
+						array(
+							'taxonomy' => 'lohnour_pathway',
+							'field'    => 'term_id',
+							'terms'    => $pathway->term_id,
+						),
+					);
+				}
 
-					<!-- Retain search term if filters are clicked -->
-					<noscript>
-						<button type="submit" class="btn btn-primary btn-sm" style="margin-top: 10px;">Apply Filters</button>
-					</noscript>
-				</form>
-			</div>
+				$programs_query = new WP_Query( $args );
 
-			<!-- PROGRAM RESULTS -->
-			<div class="results-meta" style="margin-bottom: var(--spacing-md); color: var(--color-text-secondary); font-size: 0.95rem; border-bottom: 1px solid var(--color-border-subtle); padding-bottom: var(--spacing-sm);">
-				 <?php
-				 global $wp_query;
-				 $total_results = $wp_query->found_posts;
-				 echo sprintf( esc_html( _n( '%s program found', '%s programs found', $total_results, 'twentytwentyfive-child' ) ), number_format_i18n( $total_results ) );
-				 ?>
-			</div>
-
-			<!-- PROGRAM CARDS -->
-			<?php if ( have_posts() ) : ?>
-				<div class="programs-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--spacing-lg);">
-					<?php while ( have_posts() ) : the_post(); ?>
-						<a href="<?php the_permalink(); ?>" class="lohnour-card card-program hover-lift" style="display: flex; flex-direction: column; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); background: var(--color-bg-surface); height: 100%;">
-							
-							<?php if ( has_post_thumbnail() ) : ?>
-								<div class="card-image" style="aspect-ratio: 16/9; width: 100%; overflow: hidden; background: var(--color-bg-alt); border-bottom: 1px solid var(--color-border-subtle);">
-									<?php the_post_thumbnail( 'medium', array( 'style' => 'width: 100%; height: 100%; object-fit: cover; display: block;' ) ); ?>
-								</div>
-							<?php else: ?>
-								<div class="card-image" style="aspect-ratio: 16/9; width: 100%; background: var(--color-bg-alt); display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--color-border-subtle);">
-									<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-border)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
-								</div>
-							<?php endif; ?>
-							
-							<div class="card-content" style="padding: var(--spacing-lg); flex-grow: 1; display: flex; flex-direction: column;">
-								<div style="margin-bottom: var(--spacing-sm); display: flex; gap: 8px; flex-wrap: wrap;">
-									<?php
-									$p_terms = get_the_terms( get_the_ID(), 'lohnour_pathway' );
-									if ( $p_terms && ! is_wp_error( $p_terms ) ) {
-										echo '<span class="badge" style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-accent);">' . esc_html( $p_terms[0]->name ) . '</span>';
-									} else {
-										echo '<span class="badge" style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-accent);">Program</span>';
-									}
-									?>
-								</div>
-								
-								<h3 class="card-title" style="margin-bottom: var(--spacing-xs); font-size: 1.35rem; color: var(--color-text-graphite); line-height: 1.3; font-weight: 600;"><?php the_title(); ?></h3>
-								<?php 
-								$card_excerpt = get_post_meta( get_the_ID(), '_lohnour_card_excerpt', true );
-								if ( empty( $card_excerpt ) ) {
-									$card_excerpt = wp_trim_words( get_the_excerpt(), 18, '...' );
-								}
-								?>
-								<p class="card-excerpt" style="flex-grow: 1; color: var(--color-text-secondary); font-size: 0.95rem; margin-bottom: var(--spacing-lg); line-height: 1.5;"><?php echo esc_html( $card_excerpt ); ?></p>
-								
-								<div class="card-footer" style="margin-top: auto; padding-top: var(--spacing-md); border-top: 1px solid var(--color-border-subtle);">
-									<span class="link-arrow" style="color: var(--color-text-graphite); font-weight: 500; font-size: 0.95rem;">View Program →</span>
-								</div>
+				?>
+					<section class="pathway-section" style="margin-bottom: var(--spacing-xl);">
+						<div class="pathway-header" style="margin-bottom: var(--spacing-md); display: flex; justify-content: space-between; align-items: flex-end;">
+							<div>
+								<h2 class="section-title" style="font-size: 1.75rem; margin-bottom: 4px;"><?php echo esc_html( $pathway->name ); ?></h2>
+								<p class="section-subtitle" style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 0;"><?php echo esc_html( $pathway->description ); ?></p>
 							</div>
-						</a>
-					<?php endwhile; ?>
-				</div>
-				
-				<!-- PAGINATION -->
-				<div class="pagination-wrapper" style="margin-top: var(--spacing-xxl); display: flex; justify-content: center;">
+						</div>
+					<?php if ( $programs_query->have_posts() ) : ?>
+						<div class="programs-grid">
+							<?php
+							while ( $programs_query->have_posts() ) :
+								$programs_query->the_post();
+								?>
+								<a href="<?php the_permalink(); ?>" class="service-card glass-card hover-lift" style="display: flex; flex-direction: column; height: 100%; text-decoration: none; overflow: hidden; padding: 0;">
+									<?php if ( has_post_thumbnail() ) : ?>
+										<div class="card-image-wrapper" style="position: relative; width: 100%; aspect-ratio: 16 / 9; height: auto; border-bottom: 1px solid var(--color-glass-border); overflow: hidden;">
+											<?php the_post_thumbnail( 'medium', array( 'style' => 'width: 100%; height: 100%; object-fit: cover; display: block;' ) ); ?>
+											<span class="card-badge" style="position: absolute; top: 12px; right: 12px; z-index: 2; background: rgba(0,0,0,0.6); color: #fff; border-color: rgba(255,255,255,0.2);">Program</span>
+										</div>
+									<?php endif; ?>
+									
+									<div class="card-body" style="padding: var(--spacing-md); display: flex; flex-direction: column; flex-grow: 1;">
+										<?php if ( ! has_post_thumbnail() ) : ?>
+											<div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--spacing-sm);">
+												<div class="card-icon" style="margin-bottom: 0; color: var(--color-accent);">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+												</div>
+												<span class="card-badge">Program</span>
+											</div>
+										<?php endif; ?>
+										
+										<h3 class="card-title" style="margin-bottom: var(--spacing-xs);"><?php the_title(); ?></h3>
+										<?php 
+										$card_excerpt = get_post_meta( get_the_ID(), '_lohnour_card_excerpt', true );
+										if ( empty( $card_excerpt ) ) {
+											$card_excerpt = get_the_excerpt();
+										}
+										?>
+										<p class="card-desc" style="flex-grow: 1; margin-bottom: var(--spacing-md);"><?php echo esc_html( $card_excerpt ); ?></p>
+										<span class="btn btn-outline" style="align-self: flex-start; padding: 0.4rem 0.8rem; font-size: 0.7rem;">Learn More</span>
+									</div>
+								</a>
+								<?php
+							endwhile;
+							?>
+												</div>
+					<?php else : ?>
+						<p style="color: var(--color-text-muted); font-size: 0.95rem; margin-top: var(--spacing-sm);">No active programs available in this pathway at the moment.</p>
+					<?php endif; ?>
+						<div style="margin-top: var(--spacing-md);">
+							<a href="<?php echo esc_url( get_term_link( $pathway ) ); ?>" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.75rem; text-decoration: none;">View All Programs &rarr;</a>
+						</div>
+					</section>
 					<?php
-					the_posts_pagination( array(
-						'prev_text' => '← Previous',
-						'next_text' => 'Next →',
-						'class'     => 'lohnour-pagination',
-						'mid_size'  => 2
-					) );
-					?>
-				</div>
-				<style>
-					.lohnour-pagination .nav-links { display: flex; gap: 8px; align-items: center; }
-					.lohnour-pagination .page-numbers { padding: 8px 14px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); text-decoration: none; color: var(--color-text-secondary); background: var(--color-bg-surface); transition: all 0.2s; }
-					.lohnour-pagination .page-numbers:hover { border-color: var(--color-text-graphite); color: var(--color-text-graphite); }
-					.lohnour-pagination .page-numbers.current { background: var(--color-text-graphite); color: var(--color-bg-surface); border-color: var(--color-text-graphite); }
-					.lohnour-pagination .dots { background: transparent; border: none; padding: 0; pointer-events: none; }
-				</style>
-				
-			<?php else : ?>
-				<!-- EMPTY / LOADING STATES -->
-				<div class="state-container" style="text-align: center; padding: var(--spacing-xxl) var(--spacing-md); background: var(--color-bg-surface); border: 1px dashed var(--color-border); border-radius: var(--radius-lg);">
-					<svg class="state-icon" style="margin: 0 auto var(--spacing-md); color: var(--color-text-muted); width: 48px; height: 48px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-					<h3 class="state-title" style="font-size: 1.25rem; margin-bottom: 8px; color: var(--color-text-graphite);">No programs found</h3>
-					<p class="state-desc" style="color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">Try adjusting your search or filters.</p>
-					<div>
-						<a href="<?php echo esc_url( get_post_type_archive_link( 'lohnour_service' ) ); ?>" class="btn btn-outline">Clear Filters</a>
-					</div>
-				</div>
-			<?php endif; ?>
-		</div>
-	</section>
+				wp_reset_postdata();
+			endforeach;
+		else :
+			?>
+			<p style="text-align: center; color: var(--color-text-muted);">No training pathways found.</p>
+		<?php
+		endif;
+		?>
+	</div>
 </main>
 
 <?php get_footer(); ?>
+

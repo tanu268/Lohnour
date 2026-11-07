@@ -38,15 +38,6 @@ get_header(); ?>
 						<a href="mailto:hello@pro.lohnour.com" style="text-decoration: none; color: var(--color-text); font-size: 1.25rem; font-weight: 500;">hello@pro.lohnour.com</a>
 					</div>
 					
-					<!-- Encrypted Line Tile -->
-					<div class="bento-tile glass-card hover-lift" style="flex: 1; padding: clamp(1.25rem, 2vw, 2rem); display: flex; flex-direction: column; justify-content: center; border-top: 4px solid color-mix(in srgb, var(--color-text) 10%, transparent);">
-						<div class="icon-wrapper" style="width: 48px; height: 48px; background: color-mix(in srgb, var(--color-text) 5%, transparent); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--color-text); margin-bottom: var(--spacing-sm);">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-						</div>
-						<h3 style="font-size: 1.1rem; margin-bottom: 4px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 1px;">Phone / WhatsApp</h3>
-						<a href="tel:+918349240685" style="text-decoration: none; color: var(--color-text); font-size: 1.25rem; font-weight: 500;">+91 83492 40685</a>
-					</div>
-					
 					<!-- Social Media Tile -->
 					<div class="bento-tile glass-card hover-lift" style="flex: 1; padding: clamp(1.25rem, 2vw, 2rem); display: flex; flex-direction: column; justify-content: center; border-top: 4px solid color-mix(in srgb, var(--color-text) 5%, transparent);">
 						<div class="icon-wrapper" style="width: 48px; height: 48px; background: color-mix(in srgb, var(--color-text) 5%, transparent); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--color-text); margin-bottom: var(--spacing-sm);">
@@ -86,7 +77,7 @@ get_header(); ?>
 								the_post();
 								$content = get_the_content();
 								if ( empty( trim( strip_tags( $content ) ) ) && !str_contains($content, '[') ) {
-									echo '<div style="padding: 4rem 2rem; text-align: center; color: var(--color-text-secondary);"><p style="font-size: 1.1rem;">Please reach out to us directly via email or phone using the contact details provided.</p></div>';
+									echo '<div style="padding: 4rem 2rem; border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; text-align: center; color: var(--color-text-muted); background: rgba(0,0,0,0.2);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:16px; opacity:0.5;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg><p style="margin:0; font-family: monospace; font-size: 0.9rem;">// AWAITING_FORM_SHORTCODE</p><p style="font-size:0.8rem; margin-top:8px; opacity:0.5;">Inject your form shortcode via WP Editor.</p></div>';
 								} else {
 									the_content();
 								}

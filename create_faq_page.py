@@ -1,7 +1,7 @@
 import subprocess
 
-SSH_KEY = r"D:\Downloads\ssh-key-2026-10-08.key"
-HOST = "ubuntu@193.122.206.31"
+from deploy_config import get_ssh_config
+SSH_KEY, HOST = get_ssh_config()
 
 def run_ssh(cmd):
     full_cmd = ["ssh", "-T", "-i", SSH_KEY, "-o", "ConnectTimeout=15", "-o", "StrictHostKeyChecking=no", HOST, cmd]
