@@ -52,25 +52,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const sunIcon = document.querySelector('.theme-icon-sun');
 
     if (themeToggle && moonIcon && sunIcon) {
-        const updateIcons = (isDark) => {
-            if (isDark) {
-                moonIcon.style.display = 'none';
-                sunIcon.style.display = 'block';
-            } else {
+        const updateIcons = (isLight) => {
+            if (isLight) {
                 moonIcon.style.display = 'block';
                 sunIcon.style.display = 'none';
+            } else {
+                moonIcon.style.display = 'none';
+                sunIcon.style.display = 'block';
             }
         };
 
         // Initialize state of icons
-        const isDarkInitial = document.documentElement.classList.contains('dark-theme');
-        updateIcons(isDarkInitial);
+        const isLightInitial = document.documentElement.classList.contains('light-theme');
+        updateIcons(isLightInitial);
 
         themeToggle.addEventListener('click', (e) => {
             e.preventDefault();
-            const isDark = document.documentElement.classList.toggle('dark-theme');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            updateIcons(isDark);
+            const isLight = document.documentElement.classList.toggle('light-theme');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            updateIcons(isLight);
         });
     }
 });

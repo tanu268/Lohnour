@@ -1998,8 +1998,12 @@ html.dark-theme .program-page .program-hero-banner .banner-theme-light,
 
 .program-page .program-section {
 	padding: 24px 0;
-	margin-bottom: calc(var(--spacing-md) + 20px);
+	margin-bottom: var(--spacing-md);
 	scroll-margin-top: calc(var(--site-header-height, 81px) + 65px);
+}
+
+.program-page .program-section:last-of-type {
+	margin-bottom: var(--spacing-sm);
 }
 
 .program-page .section-heading-wrapper {
@@ -3021,7 +3025,7 @@ html.dark-theme .program-page .program-hero-banner .banner-theme-light,
 
 	.program-page .program-section {
 		padding: 14px 0;
-		margin-bottom: calc(var(--spacing-sm) + 12px);
+		margin-bottom: var(--spacing-sm);
 		scroll-margin-top: calc(var(--site-header-height, 81px) + 50px);
 	}
 

@@ -39,7 +39,7 @@ function lohnour_register_post_types() {
 		'show_ui'            => true,
 		'show_in_menu'       => true,
 		'query_var'          => true,
-		'rewrite'            => array( 'slug' => 'programs', 'with_front' => false ),
+		'rewrite'            => array( 'slug' => 'services', 'with_front' => false ),
 		'capability_type'    => 'post',
 		'has_archive'        => true,
 		'hierarchical'       => false,
