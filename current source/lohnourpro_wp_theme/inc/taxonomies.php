@@ -117,7 +117,7 @@ function lohnour_register_taxonomies() {
 		'show_ui'           => true,
 		'show_admin_column' => true,
 		'query_var'         => true,
-		'rewrite'           => array( 'slug' => 'programs/pathway' ),
+		'rewrite'           => array( 'slug' => 'pathway' ),
 		'show_in_rest'      => true,
 	);
 	register_taxonomy( 'lohnour_pathway', array( 'lohnour_service' ), $pathway_args );
@@ -171,4 +171,4 @@ function lohnour_register_taxonomies() {
 	);
 	register_taxonomy( 'guide_tags', array( 'user_guide' ), $guide_tag_args );
 }
-add_action( 'init', 'lohnour_register_taxonomies', 9 );
+add_action( 'init', 'lohnour_register_taxonomies' );

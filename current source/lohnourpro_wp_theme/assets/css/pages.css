@@ -322,21 +322,6 @@ html.light-theme .bento-tile.glass-card:hover {
     align-items: center;
 }
 
-/* Sidebar Layout */
-.sidebar-layout {
-    display: grid;
-    grid-template-columns: 1.6fr 1fr;
-    gap: var(--spacing-xl);
-    align-items: start;
-}
-
-@media (max-width: 992px) {
-    .sidebar-layout {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-lg);
-    }
-}
-
 .feature-list {
     list-style: none;
     margin-top: var(--spacing-lg);
@@ -1387,30 +1372,6 @@ html.light-theme .central-agent .node-status {
         padding-left: var(--spacing-md) !important;
         padding-right: var(--spacing-md) !important;
     }
-}
-
-/* Prose Content Typography */
-.prose-content h1, 
-.prose-content h2, 
-.prose-content h3, 
-.prose-content h4 {
-    color: var(--color-text);
-    margin-top: 2em;
-    margin-bottom: 1em;
-    font-weight: 600;
-    line-height: 1.3;
-}
-.prose-content h2 { font-size: 1.75rem; }
-.prose-content h3 { font-size: 1.375rem; }
-.prose-content p { margin-bottom: 1.5em; }
-.prose-content ul, .prose-content ol { margin-bottom: 1.5em; padding-left: 1.5em; }
-.prose-content li { margin-bottom: 0.5em; }
-.prose-content img {
-    border-radius: var(--radius-md);
-    margin: 2em 0;
-    max-width: 100%;
-    height: auto;
-    border: 1px solid var(--color-glass-border);
 }
 
 
