@@ -83,13 +83,13 @@ The `developer` branch.
 **Zero** files were deleted from the repository. In accordance with safety rules 4.3 and 4.4, historical evidence, backups, and user-created files were preserved.
 
 ### 8. Which commit was created?
-`feat(infra): establish production infrastructure, CI pipeline & developer onboarding` (Hash recorded upon commit).
+`feat(infra): establish production infrastructure, CI pipeline & developer onboarding` (Commit SHA: `e1aa823ee18ec936036349e109c21443c594112f`).
 
 ### 9. Was the push successful?
-Yes, non-force push directly to `origin/developer`.
+Yes. Non-force push directly to `origin/developer` (`0b615fa..e1aa823`).
 
 ### 10. What is the final remote commit hash?
-Recorded upon remote push verification.
+`e1aa823ee18ec936036349e109c21443c594112f` (tracking `origin/developer`).
 
 ### 11. Is the working tree clean?
 All files belonging to this assignment were staged and committed. Unrelated pre-existing theme modifications (`current source/lohnourpro_wp_theme/`) remain preserved as unstaged working tree changes.
