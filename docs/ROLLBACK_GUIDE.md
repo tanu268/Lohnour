@@ -113,3 +113,4 @@ After executing any rollback procedure:
 1. **External Route Test:** Run `python scripts/test_9_canonical_routes.py` from client workstation. Verify 9/9 return `HTTP 200`.
 2. **Container Health:** Check `sudo docker ps` to confirm zero restarts (`RestartCount: 0`).
 3. **Notify Stakeholders:** Provide an incident summary with timestamps, root cause, and recovery confirmation.
+

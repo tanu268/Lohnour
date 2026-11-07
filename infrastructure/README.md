@@ -56,3 +56,4 @@ This starts:
 - WordPress on `http://localhost:8080`
 - Isolated local MariaDB instance
 - Bind-mounted local child theme (`./current source/lohnourpro_wp_theme`)
+

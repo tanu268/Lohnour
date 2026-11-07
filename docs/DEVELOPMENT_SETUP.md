@@ -199,3 +199,4 @@ docker compose -f docker-compose.local.yml logs db
 
 ### 3. Redirection to `pro.lohnour.com`
 If the browser redirects to the production domain, clear your browser cache or run in an incognito window. The container sets `define('WP_HOME', 'http://localhost:8080');` to lock the URL locally.
+

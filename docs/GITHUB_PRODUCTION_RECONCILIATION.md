@@ -75,3 +75,4 @@ Deployments to Sam's Oracle VM are performed out-of-band via SSH and shell scrip
 2. **Automated CI Checks:** GitHub Actions pipeline validates Docker Compose syntax, Caddy syntax, PHP syntax, and secret leaks on every PR.
 3. **Controlled Manual Production Deployment (Option A):** Maintain manual trigger via secure SSH deployment scripts rather than automated Portainer webhooks.
    - *Rationale:* Zero risk of unreviewed production restarts, zero credential storage on GitHub, zero impact on existing Portainer/Node-RED workloads.
+

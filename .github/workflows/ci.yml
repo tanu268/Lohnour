@@ -42,10 +42,9 @@ jobs:
           LOCAL_DB_USER: lohnour_local_user
 
       - name: Validate Caddyfile Syntax
-        uses: slomkowski/caddy-validate-action@v1
-        with:
-          caddyfile: Caddyfile
-        continue-on-error: true
+        run: |
+          docker run --rm -v "${{ github.workspace }}/Caddyfile:/etc/caddy/Caddyfile:ro" caddy:2 caddy validate --config /etc/caddy/Caddyfile
+          docker run --rm -v "${{ github.workspace }}/infrastructure/Caddyfile:/etc/caddy/Caddyfile:ro" caddy:2 caddy validate --config /etc/caddy/Caddyfile
 
   php-lint:
     name: PHP Syntax Linting
@@ -88,3 +87,4 @@ jobs:
             fi
           done
           echo "No tracked sensitive credential files found."
+

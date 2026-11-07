@@ -171,3 +171,4 @@ Every PR must satisfy the following checklist before merge approval:
 - **Local Secrets:** All passwords, SSH key locations, and API tokens must live strictly in `.env` (which is excluded by `.gitignore`).
 - **Production Secrets:** Production database passwords and keys are injected exclusively on the host server (`/opt/lohnour/.env`) or via Portainer Stack configuration.
 - **Accidental Commit Protocol:** If you ever accidentally commit a secret, **do not** attempt to cover it up with another commit. Notify the security lead immediately to rotate the credential.
+

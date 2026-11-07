@@ -122,3 +122,4 @@ Expected JSON verification response:
 ```
 
 If the verification script confirms 14 tables, 92 posts, and correct URLs, the restoration is complete and successful.
+

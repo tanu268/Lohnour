@@ -72,3 +72,4 @@ If an administrative credential is compromised or flagged during security audits
    sudo docker exec lohnour-wordpress wp user update samarpit --user_pass='<NEW_STRONG_SECURE_PASSWORD>' --allow-root
    ```
 2. Verify authentication by logging into `https://pro.lohnour.com/wp-login.php`.
+

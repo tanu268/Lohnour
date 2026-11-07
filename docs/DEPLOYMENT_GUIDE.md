@@ -150,3 +150,4 @@ All 9 canonical routes must return `HTTP 200 OK` with sub-second response times:
 9. `/wp-login.php` (Admin Login Portal)
 
 If any route fails, throws PHP fatal warnings, or returns HTTP 500, immediately refer to [ROLLBACK_GUIDE.md](ROLLBACK_GUIDE.md).
+
