@@ -104,3 +104,24 @@ comparisons/
 production-extract/
 snapshots/
 old reference/
+
+# 11. Root Duplicate Phase Reports (Authoritative copies live in docs/)
+/FINAL_CONTENT_DIFF_REPORT.md
+/LOHNOUR_PRO_POST_DEPLOYMENT_SECURITY_AUDIT.md
+/PHASE_10_*.md
+/PHASE_11_*.md
+/PHASE_12_*.md
+/PHASE_13_*.md
+/PHASE_6_BACKUP_TRANSFER_REPORT.md
+/PHASE_7_1_ROLLBACK_CORRECTION_REPORT.md
+/PHASE_7_2_FINAL_ROLLBACK_CORRECTIONS.md
+/PHASE_7_PRODUCTION_BACKUP_AND_ROLLBACK_READINESS.md
+
+# 12. Early Duplicate Draft Reports inside Theme (Canonical copies tracked in docs/)
+current source/lohnourpro_wp_theme/my-docs/BACKUP_AND_ROLLBACK.md
+current source/lohnourpro_wp_theme/my-docs/DEPLOYMENT_ARCHITECTURE.md
+current source/lohnourpro_wp_theme/my-docs/DEPLOYMENT_PLAN.md
+current source/lohnourpro_wp_theme/my-docs/INFRASTRUCTURE_AUDIT.md
+current source/lohnourpro_wp_theme/my-docs/PRE_DEPLOYMENT_CHECKLIST.md
+current source/lohnourpro_wp_theme/my-docs/SECURITY_REVIEW.md
+
