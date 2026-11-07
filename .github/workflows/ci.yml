@@ -1,0 +1,90 @@
+name: Lohnour Pro CI
+
+on:
+  push:
+    branches:
+      - developer
+      - main
+  pull_request:
+    branches:
+      - developer
+      - main
+
+jobs:
+  validate-infrastructure:
+    name: Validate Docker & Caddy Configuration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Validate Production Docker Compose
+        run: |
+          docker compose -f docker-compose.yml config --quiet
+          docker compose -f infrastructure/docker-compose.yml config --quiet
+        env:
+          DB_ROOT_PASSWORD: ci_test_root_password_placeholder
+          DB_PASSWORD: ci_test_user_password_placeholder
+          DB_NAME: lohnour_wp
+          DB_USER: lohnour_user
+
+      - name: Validate Local Docker Compose
+        run: |
+          docker compose -f docker-compose.local.yml config --quiet
+          docker compose -f infrastructure/docker-compose.local.yml config --quiet
+        env:
+          LOCAL_DB_ROOT_PASSWORD: ci_test_local_root_password
+          LOCAL_DB_PASSWORD: ci_test_local_user_password
+          LOCAL_DB_NAME: lohnour_local_wp
+          LOCAL_DB_USER: lohnour_local_user
+
+      - name: Validate Caddyfile Syntax
+        uses: slomkowski/caddy-validate-action@v1
+        with:
+          caddyfile: Caddyfile
+        continue-on-error: true
+
+  php-lint:
+    name: PHP Syntax Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Lint PHP Files
+        run: |
+          find "current source/lohnourpro_wp_theme" -type f -name "*.php" -not -path "*/.git/*" -print0 | while IFS= read -r -d '' file; do
+            php -l "$file" || exit 1
+          done
+          echo "All theme PHP files passed syntax validation."
+
+  secret-scan:
+    name: Security & Secret Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for Disallowed Secrets & Private Keys
+        run: |
+          echo "Scanning for sensitive files that must never be tracked..."
+          DISALLOWED=(".env" ".env.local" "*.key" "*.pem" "*.secret")
+          for pattern in "${DISALLOWED[@]}"; do
+            MATCHES=$(git ls-files "$pattern")
+            if [ -n "$MATCHES" ]; then
+              echo "SECURITY ERROR: Found tracked sensitive files matching $pattern:"
+              echo "$MATCHES"
+              exit 1
+            fi
+          done
+          echo "No tracked sensitive credential files found."

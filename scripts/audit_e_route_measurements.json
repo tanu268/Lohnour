@@ -1,0 +1,149 @@
+[
+  {
+    "route": "/",
+    "description": "Homepage: 9 sections & testimonial slider",
+    "status": 200,
+    "response_time_ms": 1058.32,
+    "bytes": 74727,
+    "passed": true,
+    "matched_keywords": [
+      "hero",
+      "testimonial",
+      "footer"
+    ],
+    "hsts": null,
+    "caddy_via": null,
+    "php_powered": null,
+    "alt_svc": null
+  },
+  {
+    "route": "/about/",
+    "description": "About: Founder profile & story",
+    "status": 200,
+    "response_time_ms": 2215.05,
+    "bytes": 62035,
+    "passed": true,
+    "matched_keywords": [
+      "about",
+      "founder",
+      "lohnour"
+    ],
+    "hsts": null,
+    "caddy_via": null,
+    "php_powered": null,
+    "alt_svc": null
+  },
+  {
+    "route": "/services/",
+    "description": "Services: Pathway cards & taxonomy",
+    "status": 200,
+    "response_time_ms": 981.11,
+    "bytes": 52802,
+    "passed": true,
+    "matched_keywords": [
+      "service",
+      "pathway"
+    ],
+    "hsts": null,
+    "caddy_via": null,
+    "php_powered": null,
+    "alt_svc": null
+  },
+  {
+    "route": "/coaching/",
+    "description": "Coaching: Bento grid pathways",
+    "status": 200,
+    "response_time_ms": 1014.15,
+    "bytes": 49135,
+    "passed": true,
+    "matched_keywords": [
+      "coaching"
+    ],
+    "hsts": null,
+    "caddy_via": null,
+    "php_powered": null,
+    "alt_svc": null
+  },
+  {
+    "route": "/coaching/agentic-ai-foundations/",
+    "description": "Curriculum: All 12 modules",
+    "status": 200,
+    "response_time_ms": 984.83,
+    "bytes": 101390,
+    "passed": true,
+    "matched_keywords": [
+      "module",
+      "curriculum",
+      "agentic"
+    ],
+    "hsts": null,
+    "caddy_via": null,
+    "php_powered": null,
+    "alt_svc": null
+  },
+  {
+    "route": "/guides/",
+    "description": "Guides: Knowledge base archive",
+    "status": 200,
+    "response_time_ms": 2371.27,
+    "bytes": 46636,
+    "passed": true,
+    "matched_keywords": [
+      "guide"
+    ],
+    "hsts": null,
+    "caddy_via": null,
+    "php_powered": null,
+    "alt_svc": null
+  },
+  {
+    "route": "/contact/",
+    "description": "Contact: Inquiry form & Brevo fields",
+    "status": 200,
+    "response_time_ms": 1163.66,
+    "bytes": 56125,
+    "passed": true,
+    "matched_keywords": [
+      "contact",
+      "form"
+    ],
+    "hsts": null,
+    "caddy_via": null,
+    "php_powered": null,
+    "alt_svc": null
+  },
+  {
+    "route": "/blog/",
+    "description": "Blog: Insights & article index",
+    "status": 200,
+    "response_time_ms": 1023.79,
+    "bytes": 46018,
+    "passed": true,
+    "matched_keywords": [
+      "blog",
+      "article",
+      "post"
+    ],
+    "hsts": null,
+    "caddy_via": null,
+    "php_powered": null,
+    "alt_svc": null
+  },
+  {
+    "route": "/wp-login.php",
+    "description": "Admin: Administrative login portal",
+    "status": 200,
+    "response_time_ms": 1181.86,
+    "bytes": 5727,
+    "passed": true,
+    "matched_keywords": [
+      "loginform",
+      "wp-login",
+      "user_login"
+    ],
+    "hsts": null,
+    "caddy_via": null,
+    "php_powered": null,
+    "alt_svc": null
+  }
+]

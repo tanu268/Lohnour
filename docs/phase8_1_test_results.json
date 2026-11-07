@@ -1,0 +1,142 @@
+[
+  {
+    "num": 1,
+    "name": "Clean POSIX Exit Code 0",
+    "expected": "exit 0, running, BACKUP_VERIFIED",
+    "actual": "code 0, state running",
+    "exit_code": 0,
+    "state": "running",
+    "manifest_status": "BACKUP_VERIFIED",
+    "passed": true
+  },
+  {
+    "num": 2,
+    "name": "Exit Code 2 WITH Corroborated Evidence",
+    "expected": "exit 0, running, GO_PID1_SIGTERM_EXIT_2 corroborated",
+    "actual": "code 0, state running",
+    "exit_code": 0,
+    "state": "running",
+    "manifest_status": "BACKUP_VERIFIED",
+    "passed": true
+  },
+  {
+    "num": 3,
+    "name": "Exit Code 2 WITHOUT Evidence (Non-Portainer Entrypoint)",
+    "expected": "exit 1, running restored, BACKUP_FAILED",
+    "actual": "code 1, state running",
+    "exit_code": 1,
+    "state": "running",
+    "manifest_status": "BACKUP_FAILED",
+    "passed": true
+  },
+  {
+    "num": 4,
+    "name": "Exit Code 2 WITHOUT Evidence (Timeout/Duration Exceeded)",
+    "expected": "exit 1, running restored, BACKUP_FAILED",
+    "actual": "code 1, state running",
+    "exit_code": 1,
+    "state": "running",
+    "manifest_status": "BACKUP_FAILED",
+    "passed": true
+  },
+  {
+    "num": 5,
+    "name": "Exit Code 143 WITH Shell Justification",
+    "expected": "exit 0, running, SHELL_SIGTERM_EXIT_143",
+    "actual": "code 0, state running",
+    "exit_code": 0,
+    "state": "running",
+    "manifest_status": "BACKUP_VERIFIED",
+    "passed": true
+  },
+  {
+    "num": 6,
+    "name": "Exit Code 143 WITHOUT Shell Justification",
+    "expected": "exit 1, running restored, BACKUP_FAILED",
+    "actual": "code 1, state running",
+    "exit_code": 1,
+    "state": "running",
+    "manifest_status": "BACKUP_FAILED",
+    "passed": true
+  },
+  {
+    "num": 7,
+    "name": "Exit Code 137 (SIGKILL / Force Kill)",
+    "expected": "exit 1, running restored, BACKUP_FAILED",
+    "actual": "code 1, state running",
+    "exit_code": 1,
+    "state": "running",
+    "manifest_status": "BACKUP_FAILED",
+    "passed": true
+  },
+  {
+    "num": 8,
+    "name": "OOM Killer Termination (OOMKilled: true)",
+    "expected": "exit 1, running restored, BACKUP_FAILED",
+    "actual": "code 1, state running",
+    "exit_code": 1,
+    "state": "running",
+    "manifest_status": "BACKUP_FAILED",
+    "passed": true
+  },
+  {
+    "num": 9,
+    "name": "Stop Failure Without State Change",
+    "expected": "exit 1, running preserved, BACKUP_FAILED",
+    "actual": "code 1, state running",
+    "exit_code": 1,
+    "state": "running",
+    "manifest_status": "BACKUP_FAILED",
+    "passed": true
+  },
+  {
+    "num": 10,
+    "name": "Stop Failure With State Change (Cleanup Restores)",
+    "expected": "exit 1, running restored, BACKUP_FAILED",
+    "actual": "code 1, state running",
+    "exit_code": 1,
+    "state": "running",
+    "manifest_status": "BACKUP_FAILED",
+    "passed": true
+  },
+  {
+    "num": 11,
+    "name": "Uninspectable Container State After Stop",
+    "expected": "exit 1, fail closed, BACKUP_FAILED",
+    "actual": "code 1, state running",
+    "exit_code": 1,
+    "state": "running",
+    "manifest_status": "BACKUP_FAILED",
+    "passed": true
+  },
+  {
+    "num": 12,
+    "name": "Portainer Restart Failure (RECOVERY_REQUIRED)",
+    "expected": "exit 1, manual recovery alert logged",
+    "actual": "code 1, manual alert logged",
+    "exit_code": 1,
+    "state": "exited",
+    "manifest_status": "RECOVERY_ALERT",
+    "passed": true
+  },
+  {
+    "num": 13,
+    "name": "BoltDB Corruption in Restart Logs",
+    "expected": "exit 1, aborts on database error, BACKUP_FAILED",
+    "actual": "code 1, state running",
+    "exit_code": 1,
+    "state": "running",
+    "manifest_status": "BACKUP_FAILED",
+    "passed": true
+  },
+  {
+    "num": 14,
+    "name": "Full Integration (Exact Canonical Script)",
+    "expected": "exit 0, both running, bit-for-bit restored",
+    "actual": "code 0, port=running, node=running",
+    "exit_code": 0,
+    "state": "running/running",
+    "manifest_status": "BACKUP_VERIFIED",
+    "passed": true
+  }
+]
