@@ -1,10 +1,10 @@
 # LOHNOUR PRO — POST-GITHUB-SYNC VERIFICATION & RECONCILIATION REPORT
 
 **Author / Role:** Senior Git Engineer, WordPress Specialist, DevOps Security Auditor  
-**Verification Date / Timestamp:** 2026-11-07 17:15:00 UTC  
+**Verification Date / Timestamp:** 2026-11-07 17:25:00 UTC  
 **Repository:** `https://github.com/tanu268/Lohnour`  
 **Target Branch:** `developer`  
-**Verified Remote Commit:** `62558f105f3bbd31b83e157b51d8b4d3119bb542`  
+**Verified Remote Commit:** `27338c15cb79182acef92cc0b9c03056fb3d3602`  
 **Live Production Website:** `https://pro.lohnour.com`  
 **Production Host Identity:** `sams-oracle-vm` (`141.148.51.166`, Oracle Linux Server 9.7 ARM64 `aarch64`)  
 **Operating Mode:** Read-Only Verification (Zero Production Mutations, Zero Website Disruption)  
@@ -18,19 +18,17 @@ This post-sync verification audit investigated the remote state of GitHub, the a
 
 ### Key Findings Summary:
 1. **GitHub Remote Verification:**
-   - Remote branch `origin/developer` is at exact commit `62558f105f3bbd31b83e157b51d8b4d3119bb542`.
+   - Remote branch `origin/developer` is synchronized at exact commit `27338c15cb79182acef92cc0b9c03056fb3d3602`.
    - All documentation files (`docs/`), infrastructure configurations (`infrastructure/`), root Compose manifests, and scripts exist on GitHub remote.
 2. **Actual GitHub Actions CI Status & Forensic Log Analysis:**
-   - GitHub Actions triggered automatically on push (Run ID `42393955560`).
-   - `Job: Security & Secret Scan` **PASSED** (all steps completed successfully; zero tracked secrets).
-   - `Job: PHP Syntax Linting` **PASSED** (all steps completed successfully; zero syntax errors in theme files).
-   - `Job: Validate Docker & Caddy Configuration` **FAILED** at `Step: Set up job` because a third-party action (`slomkowski/caddy-validate-action@v1`) returned HTTP 404 from the GitHub Actions Registry. The workflow has been remediated to use the official containerized command `caddy:2 caddy validate`.
-3. **WordPress Theme Reconciliation (Local vs. Production vs. GitHub):**
-   - Of the 29 files flagged in `git status`, exactly 18 have content modifications (11 were CRLF/LF line ending metadata).
-   - **17 of 18 files** are a **100% exact SHA-256 match** with the live production container (`lohnour-wordpress`).
+   - Initial push of commit `62558f1` triggered CI Run `42393955560`. `Security & Secret Scan` and `PHP Syntax Linting` PASSED; `Validate Docker & Caddy` failed due to HTTP 404 on action `slomkowski/caddy-validate-action@v1`.
+   - Remediation commit `66f3893` refactored Caddy validation to use the official container (`caddy:2 caddy validate`). CI Run `42394761343` executed and **PASSED 100% across all 3 jobs**.
+3. **WordPress Theme Reconciliation & Dependency Discovery:**
+   - Of the 29 files flagged in `git status`, exactly 18 have content modifications (11 were CRLF/LF line-ending metadata).
+   - **17 of 18 modified files** are a **100% exact SHA-256 match** with the live production container (`lohnour-wordpress`).
    - Exactly 1 file (`assets/css/theme.css`) has a single-line difference (`?ver=1.0.6` cache query strings locally vs. bare imports in production).
-   - None of the 18 files match GitHub `developer` branch because they represent the refined child theme templates restored in Phase 11/12 that were never previously committed to Git.
-   - A safe, selective synchronization plan is documented below to allow team review before staging.
+   - **Critical Dependency Identified:** `functions.php` requires `current source/lohnourpro_wp_theme/inc/contact-form.php`. Forensic check confirmed this file exists on production (`15e5e21...`) and locally, but is untracked in Git. It must be included in the theme synchronization PR to prevent a PHP fatal error.
+   - A safe, dedicated synchronization Pull Request is prepared on branch `chore/sync-production-theme-refinements`.
 4. **Infrastructure Duplicate Resolution:**
    - Root-level and `infrastructure/` copies of `docker-compose.yml`, `Caddyfile`, and `config/uploads.ini` were hashed and verified **100% identical byte-for-byte**.
    - Recommendation: Maintain both sets or designate root as the operational runtime for standard `docker compose up -d` velocity while maintaining `infrastructure/` as the canonical architectural source.
@@ -39,7 +37,7 @@ This post-sync verification audit investigated the remote state of GitHub, the a
    - Local container runtime verification was blocked on this host because the Docker Desktop Linux daemon (`dockerDesktopLinuxEngine`) was not running in this non-interactive environment.
 6. **Security Review:**
    - Historical credential in commit `5dc2188` remains isolated in past history. Credential rotation WP-CLI command is documented.
-   - Node-RED loopback binding and `adminAuth` configuration are documented for the next maintenance window.
+   - Node-RED loopback binding and `adminAuth` configuration are documented and scheduled via GitHub Issue.
 
 ---
 
@@ -51,7 +49,7 @@ This post-sync verification audit investigated the remote state of GitHub, the a
 git fetch origin
 git rev-parse origin/developer
 ```
-- **Observed Remote HEAD Commit:** `66f389398e94d540d809faac08541342747b1f1b` (initial post-sync commit was `62558f105f3bbd31b83e157b51d8b4d3119bb542`).
+- **Observed Remote HEAD Commit:** `27338c15cb79182acef92cc0b9c03056fb3d3602` (verified in commit history alongside `66f3893` and initial sync `62558f1`).
 - **Remote Synchronization:** Up to date. Local `developer` matches `origin/developer`.
 
 Remote file presence verified via `git ls-tree -r origin/developer`:
